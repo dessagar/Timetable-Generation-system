@@ -1,0 +1,119 @@
+create table building_master
+(
+	building_id number(10) primary key,
+	building_name varchar2(30) not null,
+	building_floors number(2) not null
+);
+
+create table class_master
+(
+	class_id number(10) primary key,
+	classroom_name varchar2(30) not null,
+	class_type varchar2(400) not null,
+	building _id number(10) references building_master(building_id),
+	class_floor number(2) not null
+);
+
+create table course_master
+(
+	course_code varchar2(400) primary key,
+	course_name varchar2(400) not null,
+	course_abbreviation varchar2(400),
+	year number(400),
+	no_of_theory number(400),
+	no_of_practicals number(400),
+	no_of_tutorials number(400)
+)	
+create table faculty_master
+(
+	faculty_id number(10) primary key,
+	faculty_name varchar2(30),
+	faculty_abbreviation varchar2(20),
+	faculty_email varchar2(20),
+	faculty_designation varchar2(20),
+	faculty_type varchar2(20)
+	
+)
+create table faculty_courses
+(
+	faculty_id number(10) references faculty_master(faculty_id),
+	course_code varchar2(400) references course_master(course_code)
+)
+
+create table division_master
+(
+	division_id number(10),
+	division_name varchar2(20),
+	year number(5),
+	no_of_pract_batches number(10),
+	no_of_tut_batches number(10)
+)
+create table offered_courses
+(
+	term varchar2(200),
+	course_Code varchar2(200),
+	course_name varchar2(200)
+)
+create table division_course_allocation
+(
+	term varchar2(200),
+	division varchar2(200),
+	alloted_course_code varchar2(200),
+	alloted_course_name varchar2(200) 
+)
+
+create table load_distribution
+(
+	faculty_id number(10) ,
+	faculty_name varchar2(3000) ,
+	designation varchar2(3000),
+	division varchar2(3000),
+	course_code varchar2(3000),
+	course_abbrevation varchar2(3000),
+	theory number(30) ,
+	practical number(30),
+	practical_batch varchar2(3000),
+	tutorial number(30),
+	tutorial_batch varchar2(3000),
+	load number(30)
+)
+
+create table total_load_distribution
+(
+	fac_id number(10),
+	total_load number(20)
+)
+
+create table division_total_load
+(
+	division_name varchar2(3000),
+	course_code varchar(3000),
+	theory number(10),
+	practical number(10),
+	tutorial number(10),
+)
+)
+create table slot_master
+(
+	day varchar2(300),
+	fromtime varchar2(300),
+	fromtime_status number(1),
+	totime varchar2(300),
+	totime_status number(1)
+)
+
+
+
+create table timetable_generation
+(
+	division varchar2(50),
+	course varchar2(50),
+	head varchar2(50),
+	day varchar2(50),
+	fromtime varchar2(50),
+	totime varchar2(50),
+	faculty varchar2(50),
+	practical_batch varchar2(50),
+	tutorial_batch varchar2(50),
+	classroom varchar2(50)
+)	
